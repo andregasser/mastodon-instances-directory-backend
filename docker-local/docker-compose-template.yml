@@ -1,0 +1,16 @@
+version: '3.9'
+services:
+
+  mongodb:
+    image: mongo:6.0.2
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: <PUT MONGODB USERNAME HERE>
+      MONGO_INITDB_ROOT_PASSWORD: <PUT MONGODB PASSWORD HERE>
+
+  rabbitmq:
+    image: rabbitmq:3.11.2-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
