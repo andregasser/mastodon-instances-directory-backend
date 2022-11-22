@@ -15,7 +15,10 @@ class NotificationService(
     fun notifyCheckUri(uri: String) {
         if (!urisNotifiedForChecking.contains(uri)) {
             amqpTemplate.convertAndSend(instanceEventExchangeName, checkQueueRoutingKey, uri)
-            log.debug("Added uri $uri to checkQueue")
+            urisNotifiedForChecking.add(uri)
+            log.debug("Added uri to checkQueue: $uri (first sight)")
+        } else {
+            log.debug("Not added to checkQueue: $uri (cache hit - already added earlier)")
         }
 
     }
