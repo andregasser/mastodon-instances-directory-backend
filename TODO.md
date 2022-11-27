@@ -13,4 +13,8 @@ Backend
 
 Deploy server on AWS
   - ECS
-  - 
+
+Geolocation API:
+- Create interface for looking up data. 
+- Switch to ip-api.com (45 reqs/minute for free)
+- Check qualitiy first
