@@ -4,7 +4,6 @@ import directory.mastodoninstances.backend.persistence.model.Instance
 import directory.mastodoninstances.backend.persistence.model.InstanceHousekeeping
 import directory.mastodoninstances.backend.persistence.model.InstanceInfo
 import directory.mastodoninstances.backend.persistence.model.InstanceLocation
-import directory.mastodoninstances.backend.persistence.model.InstanceSecurity
 import directory.mastodoninstances.backend.persistence.model.LastCheckResult
 import directory.mastodoninstances.backend.service.geoiplookup.GeoIpLookupException
 import directory.mastodoninstances.backend.service.geoiplookup.GeoIpLookupService
@@ -12,7 +11,6 @@ import directory.mastodoninstances.backend.service.instance.InstanceService
 import directory.mastodoninstances.backend.service.instance.InstanceServiceException
 import directory.mastodoninstances.backend.service.mastodon.MastodonService
 import directory.mastodoninstances.backend.service.mastodon.MastodonServiceException
-import directory.mastodoninstances.backend.service.security.SecurityService
 import org.bson.types.ObjectId
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -23,7 +21,6 @@ class DefaultCheckService(
     private val instanceService: InstanceService,
     private val mastodonService: MastodonService,
     private val geoIpLookupService: GeoIpLookupService,
-    private val securityService: SecurityService
 ) : CheckService {
     private val log: Logger = LoggerFactory.getLogger(DefaultCheckService::class.java)
 
@@ -106,7 +103,6 @@ class DefaultCheckService(
             this.uri = uri
             info = instanceInfo
             location = instanceLocation
-            security = InstanceSecurity()
         }
 
         try {

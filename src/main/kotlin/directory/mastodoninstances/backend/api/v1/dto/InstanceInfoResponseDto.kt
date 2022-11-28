@@ -10,5 +10,6 @@ data class InstanceInfoResponseDto(
     var registrations: Boolean? = null,
     var approvalRequired: Boolean? = null,
     var invitesEnabled: Boolean? = null,
+    var housekeeping: InstanceHousekeepingResponseDto? = null
 )
 

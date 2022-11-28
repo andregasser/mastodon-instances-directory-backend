@@ -1,6 +1,7 @@
 package directory.mastodoninstances.backend.service
 
 import directory.mastodoninstances.backend.clients.geolocation.GeoIpClient
+import directory.mastodoninstances.backend.clients.mastodonclient.MastodonClient
 import directory.mastodoninstances.backend.persistence.InstanceRepository
 import directory.mastodoninstances.backend.persistence.InstanceStatsRepository
 import directory.mastodoninstances.backend.service.check.DefaultCheckService
@@ -11,8 +12,6 @@ import directory.mastodoninstances.backend.service.instance.InstanceService
 import directory.mastodoninstances.backend.service.mastodon.DefaultMastodonService
 import directory.mastodoninstances.backend.service.mastodon.MastodonService
 import directory.mastodoninstances.backend.service.notification.NotificationService
-import directory.mastodoninstances.backend.service.security.DefaultSecurityService
-import directory.mastodoninstances.backend.service.security.SecurityService
 import org.springframework.amqp.core.AmqpTemplate
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
@@ -26,9 +25,8 @@ class ServiceConfig {
         instanceService: InstanceService,
         mastodonService: MastodonService,
         geoIpLookupService: GeoIpLookupService,
-        securityService: SecurityService
     ) =
-        DefaultCheckService(instanceService, mastodonService, geoIpLookupService, securityService)
+        DefaultCheckService(instanceService, mastodonService, geoIpLookupService)
 
     @Bean
     fun instanceService(instanceRepository: InstanceRepository, instanceStatsRepository: InstanceStatsRepository) =
@@ -43,11 +41,8 @@ class ServiceConfig {
         NotificationService(amqpTemplate, instanceEventExchangeName, checkQueueRoutingKey)
 
     @Bean
-    fun mastodonService() = DefaultMastodonService()
+    fun mastodonService(mastodonClient: MastodonClient) = DefaultMastodonService(mastodonClient)
 
     @Bean
     fun geoIpLookupService(geoIpClient: GeoIpClient) = DefaultGeoIpLookupService(geoIpClient)
-
-    @Bean
-    fun securityService() = DefaultSecurityService()
 }

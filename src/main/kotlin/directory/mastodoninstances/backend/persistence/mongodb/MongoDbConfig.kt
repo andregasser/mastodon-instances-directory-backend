@@ -14,8 +14,6 @@ import directory.mastodoninstances.backend.persistence.mongodb.codecs.InstanceHo
 import directory.mastodoninstances.backend.persistence.mongodb.codecs.InstanceCodecProvider
 import directory.mastodoninstances.backend.persistence.mongodb.codecs.InstanceInfoCodecProvider
 import directory.mastodoninstances.backend.persistence.mongodb.codecs.InstanceLocationCodecProvider
-import directory.mastodoninstances.backend.persistence.mongodb.codecs.InstanceSecurityCodec
-import directory.mastodoninstances.backend.persistence.mongodb.codecs.InstanceSecurityCodecProvider
 import directory.mastodoninstances.backend.persistence.mongodb.codecs.InstanceStatsCodec
 import directory.mastodoninstances.backend.persistence.mongodb.codecs.LastCheckResultCodec
 import org.bson.codecs.configuration.CodecRegistries.fromCodecs
@@ -41,7 +39,6 @@ class MongoDbConfig(@Value("\${db.connection.uri}") private val dbConnectionUri:
                         InstanceCodecProvider(),
                         InstanceInfoCodecProvider(),
                         InstanceLocationCodecProvider(),
-                        InstanceSecurityCodecProvider(),
                         InstanceHousekeepingCodecProvider(),
                     ),
                     MongoClientSettings.getDefaultCodecRegistry())

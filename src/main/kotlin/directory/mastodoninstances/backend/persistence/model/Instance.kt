@@ -7,5 +7,4 @@ data class Instance(
     var uri: String? = null,
     var info: InstanceInfo? = null,
     var location: InstanceLocation? = null,
-    var security: InstanceSecurity? = null,
 )
