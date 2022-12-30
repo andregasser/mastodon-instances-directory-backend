@@ -1,16 +1,16 @@
 package directory.mastodoninstances.backend.jobs
 
 import com.google.gson.Gson
-import com.sys1yagi.mastodon4j.MastodonClient
-import com.sys1yagi.mastodon4j.api.Handler
-import com.sys1yagi.mastodon4j.api.entity.Notification
-import com.sys1yagi.mastodon4j.api.entity.Status
-import com.sys1yagi.mastodon4j.api.exception.Mastodon4jRequestException
-import com.sys1yagi.mastodon4j.api.method.Streaming
 import directory.mastodoninstances.backend.service.notification.NotificationService
 import okhttp3.OkHttpClient
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import social.bigbone.MastodonClient
+import social.bigbone.api.Handler
+import social.bigbone.api.entity.Notification
+import social.bigbone.api.entity.Status
+import social.bigbone.api.exception.BigboneRequestException
+import social.bigbone.api.method.Streaming
 import java.net.URI
 import javax.annotation.PostConstruct
 
@@ -24,7 +24,7 @@ class TimelineProcessor(
     private val urisAddedToCheckQueue: MutableSet<String> = mutableSetOf()
 
     private fun processTimeline() {
-        val client = MastodonClient.Builder(mastodonInstanceUri, OkHttpClient.Builder(), Gson())
+        val client = MastodonClient.Builder(mastodonInstanceUri)
             .accessToken(mastodonInstanceAccessToken)
             .useStreamingApi()
             .build()
@@ -52,7 +52,7 @@ class TimelineProcessor(
         val streaming = Streaming(client)
         try {
             streaming.federatedPublic(handler)
-        } catch(e: Mastodon4jRequestException) {
+        } catch(e: BigboneRequestException) {
             log.error("An error occurred while fetching the Mastodon federated timeline", e)
         }
     }

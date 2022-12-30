@@ -13,7 +13,9 @@ java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
 	mavenCentral()
-	maven { url = uri("https://jitpack.io") }
+	maven {
+        url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
+	}
 }
 
 dependencies {
@@ -24,9 +26,7 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.mongodb:mongodb-driver-sync")
-	//implementation("com.github.sys1yagi.mastodon4j:mastodon4j:1.7.0")
-	implementation("com.github.andregasser.mastodon4j:mastodon4j:master-SNAPSHOT")
-	//implementation("com.github.sys1yagi.mastodon4j:mastodon4j-rx")
+	implementation("social.bigbone:bigbone:2.0.0-SNAPSHOT")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 

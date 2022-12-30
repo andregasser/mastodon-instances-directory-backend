@@ -1,7 +1,6 @@
 package directory.mastodoninstances.backend.service
 
 import directory.mastodoninstances.backend.clients.geolocation.GeoIpClient
-import directory.mastodoninstances.backend.clients.mastodonclient.MastodonClient
 import directory.mastodoninstances.backend.persistence.InstanceRepository
 import directory.mastodoninstances.backend.persistence.InstanceStatsRepository
 import directory.mastodoninstances.backend.service.check.DefaultCheckService
@@ -41,7 +40,7 @@ class ServiceConfig {
         NotificationService(amqpTemplate, instanceEventExchangeName, checkQueueRoutingKey)
 
     @Bean
-    fun mastodonService(mastodonClient: MastodonClient) = DefaultMastodonService(mastodonClient)
+    fun mastodonService() = DefaultMastodonService()
 
     @Bean
     fun geoIpLookupService(geoIpClient: GeoIpClient) = DefaultGeoIpLookupService(geoIpClient)
